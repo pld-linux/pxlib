@@ -1,12 +1,9 @@
 
-# TODO:
-# - manual pages generation (missing docbook-to-man tool)
-
 Summary:	A library to read Paradox DB files
 Summary(pl):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
 Version:	0.4.3
-Release:	1
+Release:	2
 Epoch:		0
 License:	GPL v2
 Group:		Libraries
@@ -14,6 +11,7 @@ Source0:	http://dl.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
 # Source0-md5:	1155f6704ca05c4cb6af000dd6cb5787
 URL:		http://pxlib.sourceforge.net/
 BuildRequires:	libgsf-devel
+BuildRequires:	docbook-utils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,6 +54,13 @@ Statyczna biblioteka pxlib.
 %setup -q
 
 %build
+# man pages are build by docbook2man
+sed -i -e 's#docbook-to-man#docbook2man#g' configure*
+sed -i -e 's#docbook-to-man $<.*#docbook2man $<#g' doc/Makefile*
+for man in doc/*.sgml; do
+	name=$(basename "$man" .sgml)
+	sed -i -e "s#$name#$name#gi" $man
+done
 %configure \
 	--with-gsf
 %{__make}
@@ -85,6 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*.h
 %{_pkgconfigdir}/*.pc
 %{_libdir}/lib*.la
+%{_mandir}/man3/*
 
 %files static
 %defattr(644,root,root,755)
