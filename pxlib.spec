@@ -7,7 +7,7 @@ Name:		pxlib
 Version:	0.4.3
 Release:	1
 Epoch:		0
-License:	BSD
+License:	GPL v2
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
 # Source0-md5:	1155f6704ca05c4cb6af000dd6cb5787
