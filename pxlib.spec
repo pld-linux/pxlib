@@ -3,6 +3,7 @@
 # - manual pages generation (missing docbook-to-man tool)
 
 Summary:	A library to read Paradox DB files
+Summary(pl):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
 Version:	0.4.3
 Release:	1
@@ -21,27 +22,35 @@ It supports all versions starting from 3.0. It currently has a very
 limited set of functions like to open a DB file, read its header and
 read every single record.
 
+%description -l pl
+pxlib jest prost± i ci±gle ma³± bibliotek± do odczytu plików baz
+danych Paradox DB. Obs³uguje wszystkie wersje pocz±wszy od 3.0.
+Aktualnie ma bardzo ograniczony zbiór funkcji, takich jak otworzenie
+pliku DB, odczyt nag³ówka i odczyt pojedynczego rekordu.
+
 %package devel
-Summary:	Header files and develpment documentation for pxlib
+Summary:	Header files for pxlib
+Summary(pl):	Pliki nag³ówkowe pxlib
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description devel
-pxlib is a simply and still small C library to read Paradox DB files.
-It supports all versions starting from 3.0. It currently has a very
-limited set of functions like to open a DB file, read its header and
-read every single record.
+Header files for pxlib.
+
+%description devel -l pl
+Pliki nag³ówkowe pxlib.
 
 %package static
 Summary:	Static pxlib library
+Summary(pl):	Statyczna biblioteka pxlib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
-pxlib is a simply and still small C library to read Paradox DB files.
-It supports all versions starting from 3.0. It currently has a very
-limited set of functions like to open a DB file, read its header and
-read every single record.
+Static pxlib library.
+
+%description static -l pl
+Statyczna biblioteka pxlib.
 
 %prep
 %setup -q
