@@ -12,6 +12,7 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
 # Source0-md5:	1155f6704ca05c4cb6af000dd6cb5787
 URL:		http://pxlib.sourceforge.net/
+BuildRequires:	libgsf-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,7 +47,8 @@ read every single record.
 %setup -q
 
 %build
-%configure
+%configure \
+	--with-gsf
 %{__make}
 
 %install
