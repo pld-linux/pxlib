@@ -3,7 +3,7 @@ Summary:	A library to read Paradox DB files
 Summary(pl):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
 Version:	0.5.1
-Release:	1
+Release:	2
 Epoch:		0
 License:	GPL v2
 Group:		Libraries
