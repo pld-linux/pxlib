@@ -1,4 +1,3 @@
-
 Summary:	A library to read Paradox DB files
 Summary(pl):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
@@ -10,9 +9,10 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
 # Source0-md5:	38f049b2ffe9370f98e1cf755d18a3fb
 URL:		http://pxlib.sourceforge.net/
-BuildRequires:	perl-XML-Parser
-BuildRequires:	libgsf-devel
 BuildRequires:	docbook-utils
+BuildRequires:	libgsf-devel
+BuildRequires:	perl-XML-Parser
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -90,9 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
 %{_includedir}/*.h
 %{_pkgconfigdir}/*.pc
-%{_libdir}/lib*.la
 %{_mandir}/man3/*
 
 %files static
