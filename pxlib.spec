@@ -3,7 +3,7 @@ Summary:	A library to read Paradox DB files
 Summary(pl):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
 Version:	0.5.1
-Release:	2
+Release:	3
 Epoch:		0
 License:	GPL v2
 Group:		Libraries
@@ -63,6 +63,7 @@ for man in doc/*.sgml; do
 	name=$(basename "$man" .sgml)
 	sed -i -e "s#$name#$name#gi" $man
 done
+CPPFLAGS="$(pkg-config glib-2.0 --cflags)"
 %configure \
 	--with-gsf
 %{__make}
