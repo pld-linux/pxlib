@@ -1,4 +1,5 @@
 #
+# Conditional build:
 %bcond_without	static_libs # don't build static libraries
 #
 Summary:	A library to read Paradox DB files
