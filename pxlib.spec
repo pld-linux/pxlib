@@ -1,3 +1,6 @@
+#
+%bcond_without	static_libs # don't build static libraries
+#
 Summary:	A library to read Paradox DB files
 Summary(pl):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
@@ -65,7 +68,8 @@ for man in doc/*.sgml; do
 done
 CPPFLAGS="$(pkg-config glib-2.0 --cflags)"
 %configure \
-	--with-gsf
+	--with-gsf \
+	--enable-static=%{?with_static_libs:yes}%{!?with_static_libs:no}
 %{__make}
 
 %install
@@ -95,6 +99,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/*.pc
 %{_mandir}/man3/*
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+%endif
