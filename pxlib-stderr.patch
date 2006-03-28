@@ -1,0 +1,17 @@
+diff -urN pxlib-0.6.0.org/src/paradox.c pxlib-0.6.0/src/paradox.c
+--- pxlib-0.6.0.org/src/paradox.c	2006-02-03 11:34:43.000000000 +0100
++++ pxlib-0.6.0/src/paradox.c	2006-03-28 16:09:30.000000000 +0200
+@@ -1463,10 +1463,10 @@
+ 	pxpindex_t *pindex;
+ 	int i;
+ 	pindex = pxdoc->px_indexdata;
+-	fprintf(stdout, "    | blocknr | numrecs \n");
+-	fprintf(stdout, "------------------------\n");
++	fprintf(stderr, "    | blocknr | numrecs \n");
++	fprintf(stderr, "------------------------\n");
+ 	for(i=0; i<pxdoc->px_indexdatalen; i++) {
+-		fprintf(stdout, "%3d | %7d | %7d\n", i, pindex[i].blocknumber, pindex[i].numrecords);
++		fprintf(stderr, "%3d | %7d | %7d\n", i, pindex[i].blocknumber, pindex[i].numrecords);
+ 	}
+ }
+ /* }}} */
