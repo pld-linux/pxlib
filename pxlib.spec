@@ -6,12 +6,13 @@ Summary:	A library to read Paradox DB files
 Summary(pl):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
 Version:	0.6.0
-Release:	1
+Release:	2
 Epoch:		0
 License:	GPL v2
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
 # Source0-md5:	14afa3d5f65be74e701668e47c0a1759
+Patch0:		%{name}-stderr.patch
 URL:		http://pxlib.sourceforge.net/
 BuildRequires:	docbook-utils
 BuildRequires:	libgsf-devel
@@ -57,6 +58,7 @@ Statyczna biblioteka pxlib.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 # man pages are build by docbook2man
