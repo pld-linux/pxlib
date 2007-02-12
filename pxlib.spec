@@ -3,7 +3,7 @@
 %bcond_without	static_libs # don't build static libraries
 #
 Summary:	A library to read Paradox DB files
-Summary(pl):	Biblioteka do odczytu plików baz danych Paradox DB
+Summary(pl.UTF-8):   Biblioteka do odczytu plikÃ³w baz danych Paradox DB
 Name:		pxlib
 Version:	0.6.0
 Release:	3
@@ -26,34 +26,34 @@ It supports all versions starting from 3.0. It currently has a very
 limited set of functions like to open a DB file, read its header and
 read every single record.
 
-%description -l pl
-pxlib jest prost± i ci±gle ma³± bibliotek± do odczytu plików baz
-danych Paradox DB. Obs³uguje wszystkie wersje pocz±wszy od 3.0.
-Aktualnie ma bardzo ograniczony zbiór funkcji, takich jak otworzenie
-pliku DB, odczyt nag³ówka i odczyt pojedynczego rekordu.
+%description -l pl.UTF-8
+pxlib jest prostÄ… i ciÄ…gle maÅ‚Ä… bibliotekÄ… do odczytu plikÃ³w baz
+danych Paradox DB. ObsÅ‚uguje wszystkie wersje poczÄ…wszy od 3.0.
+Aktualnie ma bardzo ograniczony zbiÃ³r funkcji, takich jak otworzenie
+pliku DB, odczyt nagÅ‚Ã³wka i odczyt pojedynczego rekordu.
 
 %package devel
 Summary:	Header files for pxlib
-Summary(pl):	Pliki nag³ówkowe pxlib
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe pxlib
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description devel
 Header files for pxlib.
 
-%description devel -l pl
-Pliki nag³ówkowe pxlib.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe pxlib.
 
 %package static
 Summary:	Static pxlib library
-Summary(pl):	Statyczna biblioteka pxlib
+Summary(pl.UTF-8):   Statyczna biblioteka pxlib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 Static pxlib library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka pxlib.
 
 %prep
