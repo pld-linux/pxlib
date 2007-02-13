@@ -3,7 +3,7 @@
 %bcond_without	static_libs # don't build static libraries
 #
 Summary:	A library to read Paradox DB files
-Summary(pl.UTF-8):   Biblioteka do odczytu plików baz danych Paradox DB
+Summary(pl.UTF-8):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
 Version:	0.6.0
 Release:	3
@@ -34,7 +34,7 @@ pliku DB, odczyt nagłówka i odczyt pojedynczego rekordu.
 
 %package devel
 Summary:	Header files for pxlib
-Summary(pl.UTF-8):   Pliki nagłówkowe pxlib
+Summary(pl.UTF-8):	Pliki nagłówkowe pxlib
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -46,7 +46,7 @@ Pliki nagłówkowe pxlib.
 
 %package static
 Summary:	Static pxlib library
-Summary(pl.UTF-8):   Statyczna biblioteka pxlib
+Summary(pl.UTF-8):	Statyczna biblioteka pxlib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
