@@ -5,16 +5,18 @@
 Summary:	A library to read Paradox DB files
 Summary(pl.UTF-8):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
-Version:	0.6.1
+Version:	0.6.3
 Release:	1
 Epoch:		0
 License:	GPL v2
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
-# Source0-md5:	397a2d6214d0fbb5a20c5b4da438a509
+# Source0-md5:	0742020854496fa757d7acbe6a895224
 Patch0:		%{name}-stderr.patch
 URL:		http://pxlib.sourceforge.net/
+BuildRequires:	docbook-to-man
 BuildRequires:	docbook-utils
+BuildRequires:	gettext-devel
 BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	perl-XML-Parser
 BuildRequires:	pkgconfig
@@ -37,6 +39,7 @@ Summary:	Header files for pxlib
 Summary(pl.UTF-8):	Pliki nagłówkowe pxlib
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libgsf-devel >= 1.14.1
 
 %description devel
 Header files for pxlib.
@@ -61,16 +64,6 @@ Statyczna biblioteka pxlib.
 %patch0 -p1
 
 %build
-# man pages are build by docbook2man
-sed -i -e 's#mv PXLIB.3 pxlib.3##g' doc/Makefile*
-sed -i -e 's#docbook-to-man#docbook2man#g' configure*
-sed -i -e 's#docbook-to-man $<.*#docbook2man $<#g' doc/Makefile*
-for man in doc/*.sgml; do
-	name=$(basename "$man" .sgml)
-	sed -i -e "s#$name#$name#gi" $man
-done
-CPPFLAGS="$(pkg-config glib-2.0 --cflags)"
-LDFLAGS="%{rpmldflags} -Wl,--as-needed"
 %configure \
 	--with-gsf \
 	--enable-static=%{?with_static_libs:yes}%{!?with_static_libs:no}
@@ -92,19 +85,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog doc/*.txt
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%doc AUTHORS ChangeLog README doc/*.txt
+%attr(755,root,root) %{_libdir}/libpx.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpx.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/*.h
-%{_pkgconfigdir}/*.pc
-%{_mandir}/man3/*
+%attr(755,root,root) %{_libdir}/libpx.so
+%{_libdir}/libpx.la
+%{_includedir}/paradox*.h
+%{_includedir}/pxversion.h
+%{_pkgconfigdir}/pxlib.pc
+%{_mandir}/man3/PX_*.3*
+%{_mandir}/man3/pxlib.3*
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libpx.a
 %endif
