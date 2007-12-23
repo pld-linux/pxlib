@@ -68,6 +68,7 @@ Statyczna biblioteka pxlib.
 %patch0 -p1
 %if "%{_lib}" == "lib64"
 %patch1 -p1
+%endif
 
 %build
 cp -f /usr/share/gettext/config.rpath .
