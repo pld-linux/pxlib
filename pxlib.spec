@@ -13,11 +13,15 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
 # Source0-md5:	0742020854496fa757d7acbe6a895224
 Patch0:		%{name}-stderr.patch
+Patch1:		%{name}-lib64.patch
 URL:		http://pxlib.sourceforge.net/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	docbook-to-man
 BuildRequires:	docbook-utils
 BuildRequires:	gettext-devel
 BuildRequires:	libgsf-devel >= 1.14.1
+BuildRequires:	libtool
 BuildRequires:	perl-XML-Parser
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,8 +66,16 @@ Statyczna biblioteka pxlib.
 %prep
 %setup -q
 %patch0 -p1
+%if "%{_lib}" == "lib64"
+%patch1 -p1
 
 %build
+cp -f /usr/share/gettext/config.rpath .
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	--with-gsf \
 	--enable-static=%{?with_static_libs:yes}%{!?with_static_libs:no}
