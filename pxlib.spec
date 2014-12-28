@@ -19,7 +19,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	docbook-to-man
 BuildRequires:	docbook-utils
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	libtool
 BuildRequires:	perl-XML-Parser
