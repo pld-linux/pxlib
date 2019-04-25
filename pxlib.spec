@@ -1,30 +1,31 @@
 #
 # Conditional build:
-%bcond_without	static_libs # don't build static libraries
+%bcond_without	static_libs	# static library
 #
 Summary:	A library to read Paradox DB files
 Summary(pl.UTF-8):	Biblioteka do odczytu plików baz danych Paradox DB
 Name:		pxlib
-Version:	0.6.3
-Release:	4
+Version:	0.6.8
+Release:	1
 Epoch:		0
 License:	GPL v2
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
-# Source0-md5:	0742020854496fa757d7acbe6a895224
+Source0:	http://downloads.sourceforge.net/pxlib/%{name}-%{version}.tar.gz
+# Source0-md5:	220578ab27348613a35a55902c3999f3
 Patch0:		%{name}-stderr.patch
-Patch1:		%{name}-lib64.patch
-Patch2:		%{name}-libx32.patch
+Patch1:		%{name}-pc.patch
 URL:		http://pxlib.sourceforge.net/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	docbook-to-man
 BuildRequires:	docbook-utils
 BuildRequires:	gettext-tools
+BuildRequires:	intltool
 BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	libtool
 BuildRequires:	perl-XML-Parser
 BuildRequires:	pkgconfig
+BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -67,23 +68,21 @@ Statyczna biblioteka pxlib.
 %prep
 %setup -q
 %patch0 -p1
-%if "%{_lib}" == "lib64"
 %patch1 -p1
-%endif
-%if "%{_lib}" == "libx32"
-%patch2 -p1
-%endif
+
+%{__sed} -i -e '/RECODE_LIBDIR=/ s,/lib$,/%{_lib},' configure.ac
 
 %build
-cp -f /usr/share/gettext/config.rpath .
+#{__gettextize}
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
-	--with-gsf \
-	--enable-static=%{?with_static_libs:yes}%{!?with_static_libs:no}
+	%{!?with_static_libs:--disable-static} \
+	--with-gsf
 %{__make}
 
 %install
@@ -92,13 +91,16 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libpx.la
+
 %find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -109,7 +111,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpx.so
-%{_libdir}/libpx.la
 %{_includedir}/paradox*.h
 %{_includedir}/pxversion.h
 %{_pkgconfigdir}/pxlib.pc
